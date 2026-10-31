@@ -423,7 +423,7 @@ footer {
       </button>
 
       <button type="button" class="type-option" data-type="divorce">
-        <span class="icon">🥀</span>
+        <span class="icon">💔</span>
         <strong>ใบสำคัญหย่า</strong>
         <small>Divorce Certificate</small>
       </button>
@@ -475,7 +475,7 @@ footer {
       </div>
 
       <div id="divorceFields" class="hidden">
-        <div class="section-title">🥀 รายละเอียดการหย่า</div>
+        <div class="section-title">💔 รายละเอียดการหย่า</div>
 
         <div class="field">
           <label>เหตุผล / ข้อความประกอบ</label>
@@ -503,8 +503,8 @@ footer {
       </button>
 
       <p class="note">
-        เอกสารที่สร้างจากเว็บไซต์นี้เป็นเอกสารบันทึกส่วนบุคคล
-        ไม่ใช่เอกสารราชการหรือเอกสารที่ใช้แทนการจดทะเบียนตามกฎหมาย
+        เอกสารที่สร้างจากถือว่าเป็นจุดเริ่มต้นและสิ้นสุดลง ณ บัดนี้
+        ขอให้คุณทั้งคู่โชคดี
       </p>
     </form>
   </section>
@@ -528,18 +528,18 @@ footer {
         </p>
 
         <div class="names" id="certNames"></div>
-        <div class="heart-divider" id="certDivider">♡ ୨୧ ♡</div>
+        <div class="heart-divider" id="certDivider">♡ ୨୧˚ ༘✿ </div>
 
         <div class="cert-details" id="certDetails"></div>
 
         <div class="cert-message" id="certMessage"></div>
 
         <div class="cert-footer">
-          ขอให้ทุกเรื่องราวเป็นความทรงจำที่มีความหมาย ♡
+          ขอให้ทุกเรื่องราวเป็นความทรงจำที่มีความหมาย 🩷
           <br>
           <div class="stamp" id="certStamp">LOVE<br>RECORDED ♡</div>
           <p style="font-size:10px; color:#b38e9b; margin-top:22px;">
-            เอกสารบันทึกส่วนบุคคล · ไม่ใช่เอกสารราชการ
+            เอกสารบันทึกส่วนบุคคล · มีผลแล้ว
           </p>
         </div>
       </div>
@@ -555,7 +555,7 @@ footer {
       </button>
 
       <button class="secondary" type="button" id="downloadButton">
-        ✧ ดาวน์โหลดข้อความ
+        📄 ดาวน์โหลดข้อความ
       </button>
 
       <button class="secondary" type="button" id="newButton">
@@ -685,7 +685,7 @@ document.getElementById('requestForm').addEventListener('submit', event => {
     `${escapeHTML(data.name2)}`;
 
   document.getElementById('certDivider').textContent =
-    isMarriage ? '୨୧ ♡ ୨୧' : '✧ ♡ ✧';
+    isMarriage ? '⎯' : '𓈒𓍼𓏸 Goodluck ༘⋆';
 
   let details = '';
 
@@ -700,7 +700,7 @@ document.getElementById('requestForm').addEventListener('submit', event => {
     document.getElementById('certMessage').textContent =
       data.vows
         ? `“ ${data.vows} ”`
-        : 'ขอให้เรื่องราวที่เริ่มต้นในวันนี้ เต็มไปด้วยความทรงจำที่งดงาม ♡';
+        : 'ขอให้เรื่องราวที่เริ่มต้นในวันนี้ เต็มไปด้วยความทรงจำที่งดงาม ';
 
     document.getElementById('certStamp').innerHTML =
       'LOVE<br>UNITED ♡';
