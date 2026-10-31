@@ -1,0 +1,784 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LOVE REGISTRY ♡ ทะเบียนรัก</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Itim&family=Mali:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --pink: #e99aaf;
+  --dark-pink: #bd657f;
+  --light-pink: #fff0f4;
+  --cream: #fffaf2;
+  --brown: #765963;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: 'Mali', cursive;
+  color: var(--brown);
+  background:
+    radial-gradient(circle at 10% 10%, #ffe0e9 0, transparent 25%),
+    radial-gradient(circle at 90% 80%, #ffe9d9 0, transparent 25%),
+    var(--cream);
+  min-height: 100vh;
+}
+
+button, input, textarea, select {
+  font: inherit;
+}
+
+header {
+  text-align: center;
+  padding: 28px 15px 15px;
+}
+
+.logo {
+  font-size: 12px;
+  letter-spacing: 4px;
+  color: var(--dark-pink);
+}
+
+header h1 {
+  font-size: clamp(30px, 7vw, 48px);
+  color: var(--dark-pink);
+  margin: 8px 0 0;
+}
+
+header p {
+  margin: 5px 0;
+  font-size: 14px;
+}
+
+.wrap {
+  max-width: 760px;
+  margin: 15px auto 45px;
+  padding: 0 16px;
+}
+
+.card {
+  background: rgba(255,255,255,.88);
+  border: 2px solid #f8d5df;
+  border-radius: 25px;
+  padding: clamp(18px, 5vw, 32px);
+  box-shadow: 0 10px 30px #d8a7b51c;
+}
+
+h2 {
+  text-align: center;
+  color: var(--dark-pink);
+  font-size: 23px;
+  margin-top: 0;
+}
+
+.subtitle {
+  text-align: center;
+  font-size: 13px;
+  margin: -8px 0 25px;
+}
+
+.type-select {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 25px;
+}
+
+.type-option {
+  border: 2px solid #f5d5df;
+  background: #fff8fa;
+  border-radius: 18px;
+  padding: 17px 8px;
+  text-align: center;
+  cursor: pointer;
+  transition: .2s;
+}
+
+.type-option.active {
+  border-color: var(--pink);
+  background: #ffe8ef;
+  box-shadow: 0 4px 12px #e99aaf22;
+}
+
+.type-option .icon {
+  display: block;
+  font-size: 30px;
+}
+
+.type-option strong {
+  display: block;
+  margin-top: 5px;
+  color: var(--dark-pink);
+}
+
+.field {
+  margin-bottom: 16px;
+}
+
+label {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 7px;
+}
+
+input, textarea, select {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1.5px solid #efd3dc;
+  border-radius: 13px;
+  background: #fffdfd;
+  color: var(--brown);
+  outline: none;
+}
+
+input:focus, textarea:focus, select:focus {
+  border-color: var(--pink);
+  box-shadow: 0 0 0 3px #fce5ec;
+}
+
+textarea {
+  min-height: 85px;
+  resize: vertical;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+.section-title {
+  border-bottom: 1px dashed #e8bdca;
+  padding-bottom: 8px;
+  margin: 25px 0 16px;
+  color: var(--dark-pink);
+  font-weight: 600;
+}
+
+.primary, .secondary {
+  border: none;
+  border-radius: 30px;
+  padding: 13px 22px;
+  cursor: pointer;
+  transition: .2s;
+}
+
+.primary {
+  background: var(--pink);
+  color: white;
+  box-shadow: 0 5px 12px #e99aaf38;
+}
+
+.primary:hover {
+  background: var(--dark-pink);
+  transform: translateY(-1px);
+}
+
+.secondary {
+  background: #fff0f4;
+  color: var(--dark-pink);
+  border: 1px solid #f3cfda;
+}
+
+.full {
+  width: 100%;
+  margin-top: 10px;
+}
+
+.note {
+  font-size: 11px;
+  line-height: 1.8;
+  text-align: center;
+  color: #a1848e;
+  margin-top: 18px;
+}
+
+/* หน้าผลใบสำคัญ */
+#certificatePage {
+  display: none;
+}
+
+.certificate {
+  background: #fffdf9;
+  border: 3px double #dfa0b2;
+  outline: 1px solid #f2d2dc;
+  outline-offset: -11px;
+  border-radius: 8px;
+  padding: 35px 23px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.certificate::before,
+.certificate::after {
+  content: "♡";
+  position: absolute;
+  color: #f4d1dc;
+  font-size: 100px;
+  opacity: .45;
+}
+
+.certificate::before {
+  top: -22px;
+  left: 4px;
+  transform: rotate(-20deg);
+}
+
+.certificate::after {
+  bottom: -30px;
+  right: 4px;
+  transform: rotate(15deg);
+}
+
+.cert-inner {
+  position: relative;
+  z-index: 1;
+}
+
+.cert-top {
+  color: var(--dark-pink);
+  font-size: 12px;
+  letter-spacing: 3px;
+}
+
+.cert-symbol {
+  font-size: 48px;
+  margin: 12px 0 0;
+}
+
+.cert-heading {
+  font-size: clamp(25px, 6vw, 37px);
+  color: var(--dark-pink);
+  margin: 8px 0;
+}
+
+.cert-english {
+  letter-spacing: 3px;
+  font-size: 11px;
+  color: #bd8a99;
+}
+
+.cert-intro {
+  margin: 25px 0 14px;
+  font-size: 14px;
+}
+
+.names {
+  font-size: clamp(20px, 5vw, 28px);
+  font-weight: 600;
+  color: #b85e7b;
+  line-height: 1.7;
+  overflow-wrap: anywhere;
+}
+
+.heart-divider {
+  color: var(--pink);
+  margin: 8px;
+  font-size: 22px;
+}
+
+.cert-details {
+  margin: 25px auto;
+  max-width: 460px;
+  text-align: left;
+  background: #fff5f7;
+  border-radius: 15px;
+  padding: 17px;
+  font-size: 13px;
+  line-height: 2;
+  overflow-wrap: anywhere;
+}
+
+.cert-details strong {
+  color: var(--dark-pink);
+}
+
+.cert-message {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  font-size: 14px;
+  line-height: 1.9;
+  margin: 15px 0;
+}
+
+.cert-footer {
+  margin-top: 30px;
+  font-size: 12px;
+  line-height: 1.9;
+}
+
+.stamp {
+  display: inline-block;
+  margin-top: 15px;
+  border: 1px solid #df9caf;
+  border-radius: 50%;
+  padding: 12px 16px;
+  color: #c97d94;
+  transform: rotate(-8deg);
+  font-size: 12px;
+}
+
+.actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.actions button {
+  width: 100%;
+}
+
+footer {
+  text-align: center;
+  padding: 0 15px 25px;
+  color: #b38e9b;
+  font-size: 12px;
+}
+
+.hidden {
+  display: none !important;
+}
+
+@media (max-width: 520px) {
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  .certificate {
+    padding: 30px 17px;
+  }
+
+  .actions {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media print {
+  body {
+    background: white;
+  }
+
+  header, footer, #formPage, .actions, .page-heading, .note {
+    display: none !important;
+  }
+
+  #certificatePage {
+    display: block !important;
+    margin: 0;
+    padding: 0;
+  }
+
+  .wrap {
+    max-width: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .card {
+    border: none;
+    box-shadow: none;
+    padding: 0;
+  }
+
+  .certificate {
+    min-height: 95vh;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo">♡ LOVE REGISTRY ♡</div>
+  <h1>ทะเบียนรัก</h1>
+  <p>บันทึกเรื่องราวของหัวใจไว้ในที่เดียว 🌷</p>
+</header>
+
+<main class="wrap">
+
+  <!-- หน้าแรก: กรอกข้อมูล -->
+  <section id="formPage" class="card">
+    <h2>♡ ขอออกใบสำคัญ ♡</h2>
+    <p class="subtitle">เลือกเอกสารที่ต้องการ แล้วกรอกข้อมูลให้ครบถ้วน</p>
+
+    <div class="type-select">
+      <button type="button" class="type-option active" data-type="marriage">
+        <span class="icon">💍</span>
+        <strong>ใบสำคัญสมรส</strong>
+        <small>Marriage Certificate</small>
+      </button>
+
+      <button type="button" class="type-option" data-type="divorce">
+        <span class="icon">🥀</span>
+        <strong>ใบสำคัญหย่า</strong>
+        <small>Divorce Certificate</small>
+      </button>
+    </div>
+
+    <form id="requestForm">
+      <div class="section-title">♡ ข้อมูลคู่ของคุณ</div>
+
+      <div class="grid">
+        <div class="field">
+          <label id="name1Label">ชื่อคู่สมรสฝ่ายที่หนึ่ง *</label>
+          <input id="name1" required maxlength="100"
+                 placeholder="ชื่อ-นามสกุล">
+        </div>
+
+        <div class="field">
+          <label id="name2Label">ชื่อคู่สมรสฝ่ายที่สอง *</label>
+          <input id="name2" required maxlength="100"
+                 placeholder="ชื่อ-นามสกุล">
+        </div>
+      </div>
+
+      <div class="grid">
+        <div class="field">
+          <label id="dateLabel">วันที่สมรส *</label>
+          <input type="date" id="eventDate" required>
+        </div>
+
+        <div class="field">
+          <label>สถานที่</label>
+          <input id="location" maxlength="150"
+                 placeholder="เช่น สวนดอกไม้">
+        </div>
+      </div>
+
+      <div id="marriageFields">
+        <div class="section-title">💗 รายละเอียดความรัก</div>
+
+        <div class="field">
+          <label>คำมั่นสัญญา / ข้อความถึงกัน</label>
+          <textarea id="vows" maxlength="800"
+            placeholder="เขียนข้อความพิเศษถึงคนสำคัญ..."></textarea>
+        </div>
+
+        <div class="field">
+          <label>วันครบรอบที่ต้องการบันทึก (ถ้ามี)</label>
+          <input type="date" id="anniversary">
+        </div>
+      </div>
+
+      <div id="divorceFields" class="hidden">
+        <div class="section-title">🥀 รายละเอียดการหย่า</div>
+
+        <div class="field">
+          <label>เหตุผล / ข้อความประกอบ</label>
+          <textarea id="reason" maxlength="800"
+            placeholder="บันทึกเหตุผลหรือข้อความที่ต้องการ..."></textarea>
+        </div>
+
+        <div class="field">
+          <label>ข้อตกลงเพิ่มเติม (ถ้ามี)</label>
+          <textarea id="agreement" maxlength="800"
+            placeholder="บันทึกข้อตกลงของทั้งสองฝ่าย..."></textarea>
+        </div>
+      </div>
+
+      <div class="field">
+        <label>
+          <input type="checkbox" id="confirm" required
+                 style="width:auto; margin-right:6px;">
+          ฉันตรวจสอบข้อมูลที่กรอกแล้ว *
+        </label>
+      </div>
+
+      <button class="primary full" type="submit">
+        ✧ ขอออกใบสำคัญ ✧
+      </button>
+
+      <p class="note">
+        เอกสารที่สร้างจากเว็บไซต์นี้เป็นเอกสารบันทึกส่วนบุคคล
+        ไม่ใช่เอกสารราชการหรือเอกสารที่ใช้แทนการจดทะเบียนตามกฎหมาย
+      </p>
+    </form>
+  </section>
+
+  <!-- หน้าที่สอง: ใบสำคัญที่สร้างเสร็จ -->
+  <section id="certificatePage" class="card">
+    <div class="page-heading">
+      <h2>♡ ใบสำคัญของคุณพร้อมแล้ว ♡</h2>
+      <p class="subtitle">นี่คือเอกสารที่สร้างจากข้อมูลที่คุณกรอก</p>
+    </div>
+
+    <article class="certificate" id="printArea">
+      <div class="cert-inner">
+        <div class="cert-top">LOVE REGISTRY · PERSONAL RECORD</div>
+        <div class="cert-symbol" id="certSymbol">💍</div>
+        <h1 class="cert-heading" id="certTitle">ใบสำคัญสมรส</h1>
+        <div class="cert-english" id="certEnglish">MARRIAGE CERTIFICATE</div>
+
+        <p class="cert-intro" id="certIntro">
+          เอกสารฉบับนี้บันทึกไว้ว่า
+        </p>
+
+        <div class="names" id="certNames"></div>
+        <div class="heart-divider" id="certDivider">♡ ୨୧ ♡</div>
+
+        <div class="cert-details" id="certDetails"></div>
+
+        <div class="cert-message" id="certMessage"></div>
+
+        <div class="cert-footer">
+          ขอให้ทุกเรื่องราวเป็นความทรงจำที่มีความหมาย ♡
+          <br>
+          <div class="stamp" id="certStamp">LOVE<br>RECORDED ♡</div>
+          <p style="font-size:10px; color:#b38e9b; margin-top:22px;">
+            เอกสารบันทึกส่วนบุคคล · ไม่ใช่เอกสารราชการ
+          </p>
+        </div>
+      </div>
+    </article>
+
+    <div class="actions">
+      <button class="secondary" type="button" id="backButton">
+        ← กลับไปแก้ข้อมูล
+      </button>
+
+      <button class="primary" type="button" onclick="window.print()">
+        ♡ พิมพ์ / บันทึก PDF
+      </button>
+
+      <button class="secondary" type="button" id="downloadButton">
+        ✧ ดาวน์โหลดข้อความ
+      </button>
+
+      <button class="secondary" type="button" id="newButton">
+        + สร้างใบสำคัญใหม่
+      </button>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  Made with ♡ by LOVE REGISTRY
+</footer>
+
+<script>
+let selectedType = 'marriage';
+let lastCertificateText = '';
+
+const formPage = document.getElementById('formPage');
+const certificatePage = document.getElementById('certificatePage');
+const marriageFields = document.getElementById('marriageFields');
+const divorceFields = document.getElementById('divorceFields');
+
+const name1 = document.getElementById('name1');
+const name2 = document.getElementById('name2');
+const eventDate = document.getElementById('eventDate');
+
+const dateLabel = document.getElementById('dateLabel');
+const name1Label = document.getElementById('name1Label');
+const name2Label = document.getElementById('name2Label');
+
+function setType(type) {
+  selectedType = type;
+
+  document.querySelectorAll('.type-option').forEach(button => {
+    button.classList.toggle('active', button.dataset.type === type);
+  });
+
+  const isMarriage = type === 'marriage';
+
+  marriageFields.classList.toggle('hidden', !isMarriage);
+  divorceFields.classList.toggle('hidden', isMarriage);
+
+  name1Label.textContent = isMarriage
+    ? 'ชื่อคู่สมรสฝ่ายที่หนึ่ง *'
+    : 'ชื่อผู้ยื่นขอหย่าฝ่ายที่หนึ่ง *';
+
+  name2Label.textContent = isMarriage
+    ? 'ชื่อคู่สมรสฝ่ายที่สอง *'
+    : 'ชื่อผู้ยื่นขอหย่าฝ่ายที่สอง *';
+
+  dateLabel.textContent = isMarriage
+    ? 'วันที่สมรส *'
+    : 'วันที่หย่า *';
+
+  eventDate.setCustomValidity('');
+}
+
+document.querySelectorAll('.type-option').forEach(button => {
+  button.addEventListener('click', () => setType(button.dataset.type));
+});
+
+function escapeHTML(value) {
+  return String(value ?? '').replace(/[&<>"']/g, char => ({
+    '&': '&amp;',
+    '<': '&lt;',
+    '>': '&gt;',
+    '"': '&quot;',
+    "'": '&#39;'
+  })[char]);
+}
+
+function formatDate(value) {
+  if (!value) return 'ไม่ได้ระบุ';
+
+  const parts = value.split('-');
+  if (parts.length !== 3) return value;
+
+  return `${Number(parts[2])}/${Number(parts[1])}/${parts[0]}`;
+}
+
+function detailRow(label, value) {
+  if (!value) return '';
+
+  return `<div><strong>${escapeHTML(label)}:</strong> ${
+    escapeHTML(value)
+  }</div>`;
+}
+
+document.getElementById('requestForm').addEventListener('submit', event => {
+  event.preventDefault();
+
+  if (!event.currentTarget.reportValidity()) return;
+
+  const isMarriage = selectedType === 'marriage';
+
+  const data = {
+    name1: name1.value.trim(),
+    name2: name2.value.trim(),
+    date: formatDate(eventDate.value),
+    location: document.getElementById('location').value.trim(),
+    vows: document.getElementById('vows').value.trim(),
+    anniversary: formatDate(
+      document.getElementById('anniversary').value
+    ),
+    reason: document.getElementById('reason').value.trim(),
+    agreement: document.getElementById('agreement').value.trim()
+  };
+
+  document.getElementById('certSymbol').textContent =
+    isMarriage ? '💍' : '🥀';
+
+  document.getElementById('certTitle').textContent =
+    isMarriage ? 'ใบสำคัญสมรส' : 'ใบสำคัญหย่า';
+
+  document.getElementById('certEnglish').textContent =
+    isMarriage ? 'MARRIAGE CERTIFICATE' : 'DIVORCE CERTIFICATE';
+
+  document.getElementById('certIntro').textContent =
+    isMarriage
+      ? 'เอกสารฉบับนี้บันทึกไว้ว่า'
+      : 'เอกสารฉบับนี้บันทึกเรื่องราวของ';
+
+  document.getElementById('certNames').innerHTML =
+    `${escapeHTML(data.name1)}<br>` +
+    `<span style="font-size:20px">♡ & ♡</span><br>` +
+    `${escapeHTML(data.name2)}`;
+
+  document.getElementById('certDivider').textContent =
+    isMarriage ? '୨୧ ♡ ୨୧' : '✧ ♡ ✧';
+
+  let details = '';
+
+  if (isMarriage) {
+    details += detailRow('วันที่สมรส', data.date);
+    details += detailRow('สถานที่', data.location);
+    details += detailRow(
+      'วันครบรอบ',
+      data.anniversary === 'ไม่ได้ระบุ' ? '' : data.anniversary
+    );
+
+    document.getElementById('certMessage').textContent =
+      data.vows
+        ? `“ ${data.vows} ”`
+        : 'ขอให้เรื่องราวที่เริ่มต้นในวันนี้ เต็มไปด้วยความทรงจำที่งดงาม ♡';
+
+    document.getElementById('certStamp').innerHTML =
+      'LOVE<br>UNITED ♡';
+
+  } else {
+    details += detailRow('วันที่หย่า', data.date);
+    details += detailRow('สถานที่', data.location);
+    details += detailRow('เหตุผล', data.reason);
+    details += detailRow('ข้อตกลงเพิ่มเติม', data.agreement);
+
+    document.getElementById('certMessage').textContent =
+      'ขอบันทึกการสิ้นสุดความสัมพันธ์ครั้งนี้ไว้ ' +
+      'และขอให้ทั้งสองฝ่ายได้พบกับเส้นทางที่เหมาะสมกับตนเอง';
+
+    document.getElementById('certStamp').innerHTML =
+      'RECORD<br>CLOSED ♡';
+  }
+
+  document.getElementById('certDetails').innerHTML =
+    details || '<div>ไม่มีข้อมูลเพิ่มเติม</div>';
+
+  lastCertificateText =
+    `${isMarriage ? 'ใบสำคัญสมรส' : 'ใบสำคัญหย่า'}\n\n` +
+    `ชื่อฝ่ายที่หนึ่ง: ${data.name1}\n` +
+    `ชื่อฝ่ายที่สอง: ${data.name2}\n` +
+    `วันที่: ${data.date}\n` +
+    `สถานที่: ${data.location || 'ไม่ได้ระบุ'}\n` +
+    (isMarriage
+      ? `วันครบรอบ: ${
+          data.anniversary === 'ไม่ได้ระบุ'
+            ? 'ไม่ได้ระบุ'
+            : data.anniversary
+        }\nคำมั่นสัญญา: ${data.vows || 'ไม่ได้ระบุ'}\n`
+      : `เหตุผล: ${data.reason || 'ไม่ได้ระบุ'}\n` +
+        `ข้อตกลง: ${data.agreement || 'ไม่ได้ระบุ'}\n`) +
+    '\nเอกสารบันทึกส่วนบุคคล ไม่ใช่เอกสารราชการ';
+
+  // เปลี่ยนไปหน้าถัดไปหลังสร้างใบสำเร็จ
+  formPage.style.display = 'none';
+  certificatePage.style.display = 'block';
+
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+});
+
+document.getElementById('backButton').addEventListener('click', () => {
+  certificatePage.style.display = 'none';
+  formPage.style.display = 'block';
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+});
+
+document.getElementById('newButton').addEventListener('click', () => {
+  document.getElementById('requestForm').reset();
+  setType('marriage');
+
+  certificatePage.style.display = 'none';
+  formPage.style.display = 'block';
+
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+});
+
+document.getElementById('downloadButton').addEventListener('click', () => {
+  const blob = new Blob(
+    ['\uFEFF' + lastCertificateText],
+    { type: 'text/plain;charset=utf-8' }
+  );
+
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement('a');
+
+  link.href = url;
+  link.download = selectedType === 'marriage'
+    ? 'love-registry-marriage.txt'
+    : 'love-registry-divorce.txt';
+
+  link.click();
+  URL.revokeObjectURL(url);
+});
+</script>
+
+</body>
+</html>
