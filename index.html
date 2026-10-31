@@ -666,7 +666,7 @@ document.getElementById('requestForm').addEventListener('submit', event => {
   };
 
   document.getElementById('certSymbol').textContent =
-    isMarriage ? '💍' : '🥀';
+    isMarriage ? '💍' : '💔';
 
   document.getElementById('certTitle').textContent =
     isMarriage ? 'ใบสำคัญสมรส' : 'ใบสำคัญหย่า';
@@ -681,11 +681,11 @@ document.getElementById('requestForm').addEventListener('submit', event => {
 
   document.getElementById('certNames').innerHTML =
     `${escapeHTML(data.name1)}<br>` +
-    `<span style="font-size:20px">♡ & ♡</span><br>` +
+    `<span style="font-size:20px">&</span><br>` +
     `${escapeHTML(data.name2)}`;
 
   document.getElementById('certDivider').textContent =
-    isMarriage ? '⎯' : '𓈒𓍼𓏸 Goodluck ༘⋆';
+    isMarriage ? '♡ ୨୧˚ ༘✿ ' : '𓈒𓍼𓏸 Good Bye ༘⋆';
 
   let details = '';
 
@@ -700,7 +700,7 @@ document.getElementById('requestForm').addEventListener('submit', event => {
     document.getElementById('certMessage').textContent =
       data.vows
         ? `“ ${data.vows} ”`
-        : 'ขอให้เรื่องราวที่เริ่มต้นในวันนี้ เต็มไปด้วยความทรงจำที่งดงาม ';
+        : 'ขอให้เรื่องราวที่เริ่มต้นในวันนี้ เต็มไปด้วยความทรงจำที่งดงามรักกันนาน ๆ ';
 
     document.getElementById('certStamp').innerHTML =
       'LOVE<br>UNITED ♡';
